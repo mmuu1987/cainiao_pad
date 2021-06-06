@@ -252,29 +252,22 @@ public class NetManager : MonoBehaviour
 	}
 
 	// Token: 0x06000661 RID: 1633 RVA: 0x000464DB File Offset: 0x000446DB
-	public IEnumerator PostPictureToServer(Texture2D tex)
+	public IEnumerator PostPictureToServer(string uuid,string content)
 	{
 		string netPath = null;
 		WWWForm form = new WWWForm();
-		string uuid = GlobalSettings.CreatUuid();
-		bool flag = string.IsNullOrEmpty(uuid);
-		if (flag)
-		{
-			uuid = "null";
-		}
+		
 		form.AddField("PicUuid", uuid);
-		form.AddField("Sited", GlobalSettings.Stie);
+		form.AddField("Sited", content);
 		form.AddField("Extension", "jpg");
-		byte[] bytes = tex.EncodeToJPG();
-		form.AddBinaryData("PicUuidData", bytes, "test", "application/octet-stream");
+		
 		UnityEngine.Debug.Log(string.Concat(new object[]
 		{
-			"bytes length is ",
-			bytes.Length,
+			
 			"  ServerPictureIp ",
 			GlobalSettings.ServerPictureIp
 		}));
-		UnityWebRequest webRequest = UnityWebRequest.Post(GlobalSettings.ServerPictureIp, form);
+		UnityWebRequest webRequest = UnityWebRequest.Post(GlobalSettings.ServerSetValueIp, form);
 		yield return webRequest.SendWebRequest();
 		bool flag2 = webRequest.isNetworkError || !string.IsNullOrEmpty(webRequest.error);
 		if (flag2)
@@ -285,7 +278,10 @@ public class NetManager : MonoBehaviour
 		{
 			netPath = webRequest.downloadHandler.text;
 		}
+
 		bool flag3 = netPath == null;
+
+
 		if (flag3)
 		{
 			UnityEngine.Debug.LogError("服务器返回错误信息 " + netPath);

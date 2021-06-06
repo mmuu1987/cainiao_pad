@@ -366,6 +366,8 @@ public static class GlobalSettings
 	// Token: 0x0400067E RID: 1662
 	public static string ServerPictureIp = "http://www.syyj.tglfair.com/Webpage/VoiceOffice/MyScreenshots.aspx";
 
+    public static string ServerSetValueIp = "http://www.syyj.tglfair.com/Webpage/SetValue.aspx";
+
 	public static string ServerMP4Ip = "http://www.syyj.tglfair.com/Webpage/VoiceOffice/ServerGetMp4.aspx";
 
 	public static string GetMp4 = "http://www.syyj.tglfair.com/Webpage/VoiceOffice/ClientGetMp4.aspx";
