@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Runtime.InteropServices;
+using System.Text.RegularExpressions;
 using System.Xml;
 using UnityEngine;
 using ZXing;
@@ -240,6 +241,17 @@ public static class GlobalSettings
 		}
 		yield break;
 	}
+
+	/// <summary>
+	/// 判断字符串是否是IP地址格式
+	/// </summary>
+	/// <param name="ipAddress"></param>
+	/// <returns></returns>
+    public static bool ValidateIPAddress(string ipAddress)
+    {
+        Regex validipregex = new Regex(@"^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$");
+        return (ipAddress != "" && validipregex.IsMatch(ipAddress.Trim())) ? true : false;
+    }
 
 	// Token: 0x0600063A RID: 1594 RVA: 0x00045BD8 File Offset: 0x00043DD8
 	public static void InitArg()

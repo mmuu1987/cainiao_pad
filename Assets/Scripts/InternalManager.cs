@@ -15,6 +15,12 @@ public class InternalManager : MonoBehaviour
 
     public Button ConfirmButton_two;
 
+    public InputField InputField_ip;
+
+    public Button ConfirmButton_ip;
+
+    public RectTransform IpStateTransform;
+
     public RectTransform OneStateTransform;
 
     public RectTransform TwoStateTransform;
@@ -28,9 +34,30 @@ public class InternalManager : MonoBehaviour
     private int _day = 5;
 
     private int _curCount = 0;
+
+    private string ip = null;
     // Start is called before the first frame update
     void Start()
     {
+
+        ConfirmButton_ip.onClick.AddListener((() =>
+        {
+            string str = InputField_ip.text;
+
+            bool isIp = GlobalSettings.ValidateIPAddress(str);
+
+            if (isIp)
+            {
+                ip = str;
+                IpStateTransform.gameObject.SetActive(false);
+                OneStateTransform.gameObject.SetActive(true);
+            }
+            else
+            {
+                InputField_ip.text = "格式不正确，请重新输入";
+            }
+        }));
+
         ConfirmBtn_one.onClick.AddListener(() =>
         {
             string str = InputField_one.text;
