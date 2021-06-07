@@ -16,7 +16,7 @@ public class NetManager : MonoBehaviour
 	// (add) Token: 0x06000651 RID: 1617 RVA: 0x00045FC0 File Offset: 0x000441C0
 	// (remove) Token: 0x06000652 RID: 1618 RVA: 0x00045FF8 File Offset: 0x000441F8
 	
-	public event Action<Texture2D> PostPictureCompleted;
+	public event Action<string> PostPictureCompleted;
 
 
 	public event Action<Texture2D> PostMp4Completed;
@@ -294,15 +294,15 @@ public class NetManager : MonoBehaviour
 		else
 		{
 			string url = netPath;
-			Texture2D newTex = GlobalSettings.GetQr(url);
+			
 			bool flag5 = this.PostPictureCompleted != null;
 			if (flag5)
 			{
-				this.PostPictureCompleted(newTex);
+				this.PostPictureCompleted(netPath);
 			}
 			UnityEngine.Debug.Log(url);
 			url = null;
-			newTex = null;
+			
 		}
 		yield break;
 	}

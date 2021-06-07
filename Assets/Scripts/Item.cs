@@ -19,6 +19,11 @@ public class Item : MonoBehaviour
         _parentImage = this.GetComponent<Image>();
 
         RectTransform = _parentImage.rectTransform;
+
+        this.GetComponent<Button>().onClick.AddListener((() =>
+        {
+            InternalactionManager.Instance.InputField_two.text = image.sprite.name;
+        }));
     }
     // Start is called before the first frame update
     void Start()

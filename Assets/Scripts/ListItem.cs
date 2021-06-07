@@ -18,7 +18,7 @@ public class ListItem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+       // Debug.Log("屏幕分辨率为："+Screen.width+"  "+Screen.height);
         AddItem();
 
     }
@@ -102,9 +102,9 @@ public class ListItem : MonoBehaviour
 
             item.transform.parent = this.transform;
 
-            int index = Random.Range(0, InternalManager.Instance.Sprites.Count);
+            int index = Random.Range(0, InternalactionManager.Instance.Sprites.Count);
 
-            Sprite sprite = InternalManager.Instance.Sprites[index];
+            Sprite sprite = InternalactionManager.Instance.Sprites[index];
 
             item.SetInfo(sprite);
 

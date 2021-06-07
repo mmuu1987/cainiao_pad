@@ -5,10 +5,10 @@ using UnityEngine;
 using UnityEngine.UI;
 using Object = UnityEngine.Object;
 
-public class InternalManager : MonoBehaviour
+public class InternalactionManager : MonoBehaviour
 {
 
-    public static InternalManager Instance;
+    public static InternalactionManager Instance;
     public InputField InputField_one;
 
     public Button ConfirmBtn_one;
@@ -82,8 +82,24 @@ public class InternalManager : MonoBehaviour
             }
         });
 
+        NetManager.Instance.PostPictureCompleted += PostPictureCompleted;
 
         _curCount = HandleTime();
+    }
+
+    private void PostPictureCompleted(string obj)
+    {
+        if (!string.IsNullOrEmpty(obj))
+        {
+            TwoStateTransform.gameObject.SetActive(false);
+
+            StartCoroutine(GlobalSettings.WaitTime(1f, (() =>
+            {
+                OneStateTransform.gameObject.SetActive(true);
+                InputField_one.text = null;
+
+            })));
+        }
     }
 
     /// <summary>
