@@ -17,6 +17,8 @@ public class InternalactionManager : MonoBehaviour
 
     public Button ConfirmButton_two;
 
+    public Text Name_two;
+
     public InputField InputField_ip;
 
     public Button ConfirmButton_ip;
@@ -60,12 +62,14 @@ public class InternalactionManager : MonoBehaviour
         ConfirmBtn_one.onClick.AddListener(() =>
         {
             string str = InputField_one.text;
+             str = SystemUtil.Filter(str);
             if (!string.IsNullOrEmpty(str))
             {
                 Debug.LogError("第一状态输入的文字是：" + str);
                 TwoStateTransform.gameObject.SetActive(true);
                 OneStateTransform.gameObject.SetActive(false);
                 _name = str;
+                Name_two.text = _name;
             }
         });
 
@@ -73,10 +77,11 @@ public class InternalactionManager : MonoBehaviour
         ConfirmButton_two.onClick.AddListener(() =>
         {
             string str = InputField_two.text;
+            str = SystemUtil.Filter(str);
             if (!string.IsNullOrEmpty(str))
             {
                 Debug.LogError("第二状态输入的文字是：" + str);
-
+                InputField_two.text = null;
                 _description = str;
                 StartCoroutine(NetManager.Instance.PostPictureToServer(_name, _description));
             }
