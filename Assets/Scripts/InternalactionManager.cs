@@ -47,6 +47,9 @@ public class InternalactionManager : MonoBehaviour
 
     private string _description = null;
 
+    /// <summary>
+    /// 
+    /// </summary>
     private void Awake()
     {
         if(Instance!=null)throw new UnityException("已经有单例了");
